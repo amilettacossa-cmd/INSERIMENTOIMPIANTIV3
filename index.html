@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Raccolta Interventi LUCE</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a1020">
+<!-- iOS Home Screen icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+
+<style>
+:root{--bg:#0a1020;--panel:#111a2e;--panel2:#0d1526;--text:#eaf1fb;--muted:#9fb0c9;--border:#22345a;--brand:#6fb4ff;--green:#22c55e;--focus:rgba(111,180,255,.25);}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+*{box-sizing:border-box}
+.container{max-width:1000px;margin:24px auto;padding:0 14px;position:relative;z-index:0}
+header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+header img{width:42px;height:42px;border-radius:10px;object-fit:contain;background:#0d1526;border:1px solid var(--border);padding:4px}
+h1{margin:0;font-size:clamp(20px,3.6vw,30px)}
+.panel{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:16px;padding:14px;position:relative;z-index:1;pointer-events:auto}
+.row{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:720px){.row{grid-template-columns:1fr}}
+label{display:block;font-weight:700;margin:2px 0 6px}
+input,select,textarea{display:block;width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#0c1731;color:#eaf1fb;font-size:16px;min-height:44px}
+button{background:var(--brand);color:#071122;border:none;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer;box-shadow:0 8px 22px rgba(111,180,255,.25);min-height:44px;pointer-events:auto}
+.btn-outline{background:transparent;color:#cfe0ff;border:1px solid var(--border)}
+.btn-success{background:var(--green);color:#05240f}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:#0d1835;color:#cfe0ff;font-size:12px}
+.hidden{display:none !important}
+.tablewrap{overflow:auto;border-radius:12px;border:1px solid var(--border);margin-top:10px}
+table{width:100%;border-collapse:collapse}
+th,td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;background:#0d1733}
+thead th{position:sticky;top:0;background:#0b1630;z-index:1;color:#cfe0ff}
+.right{text-align:right}
+a.link{color:#8bb8ff;text-decoration:underline;cursor:pointer}
+.input-wrap{display:block;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#0c1731}
+.input-wrap input[type="date"]{border:0;background:transparent;padding:12px;min-height:44px;width:100%;color:#eaf1fb}
+.overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:1000;padding:20px}
+.card{width:min(560px,96vw);background:#0f1a36;border:1px solid var(--border);border-radius:18px;padding:20px;text-align:center;box-shadow:0 16px 60px rgba(0,0,0,.35)}
+.check{width:64px;height:64px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;background:rgba(34,197,94,.12);border:2px solid #22c55e;color:#22c55e}
+.card h3{margin:8px 0 6px 0;font-size:22px}
+.card p{margin:0;color:#cfe0ff}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.small{font-size:13px;color:#9fb0c9}
+</style>
+
+<style>
+.actions-inline{display:flex;gap:8px;align-items:center;justify-content:flex-end}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:10px;border:1px solid #22345a;background:#0e1d3f;cursor:pointer}
+.icon-btn svg{width:18px;height:18px;fill:#eaf1fb}
+.icon-btn.edit{}
+.icon-btn.del{}
+</style>
+
+
+<style>
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid #22345a;background:#0e1d3f;cursor:pointer;color:#eaf1fb}
+.icon-btn svg{width:18px;height:18px;display:block}
+.actions-inline{display:flex;gap:8px;align-items:center;justify-content:flex-end}
+</style>
+
+<style>
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid #22345a;background:#0e1d3f;cursor:pointer}
+.actions-inline{display:flex;gap:8px;align-items:center;justify-content:flex-end}
+.icon-btn img{width:18px;height:18px;display:block}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <header>
+    <img src="assets/logo-luce.png" alt="LUCE">
+    <h1>RACCOLTA INTERVENTI LUCE</h1>
+  </header>
+
+  <div class="panel" id="whoPanel">
+    <div id="whoEmpty">
+      <label for="tech">Nome tecnico</label>
+      <select id="tech">
+        <option value="">— seleziona —</option>
+        <option value="ALESSANDRO FINOTTI">ALESSANDRO FINOTTI</option>
+        <option value="ALFREDO MILETTA">ALFREDO MILETTA</option>
+        <option value="CHRISTIAN FICHERA">CHRISTIAN FICHERA</option>
+        <option value="DANILO QUATTROCCHI">DANILO QUATTROCCHI</option>
+        <option value="FEDERICO  BONARDI">FEDERICO  BONARDI</option>
+        <option value="FEDERICO MEROLLA">FEDERICO MEROLLA</option>
+        <option value="GABRIELE SPINELLI">GABRIELE SPINELLI</option>
+        <option value="LUCA DI MARCO">LUCA DI MARCO</option>
+        <option value="MARCO MILETTA">MARCO MILETTA</option>
+        <option value="NICOLO’ FIORE">NICOLO’ FIORE</option>
+        <option value="SAMUELE CHIAMPAN">SAMUELE CHIAMPAN</option>
+        <option value="SIMONE MILETTA">SIMONE MILETTA</option>
+        <option value="TIMOTHY FUSCO">TIMOTHY FUSCO</option>
+      </select>
+      <div style="margin-top:10px"><button id="setTech" type="button" class="btn-success">Conferma tecnico</button></div>
+    </div>
+    <div id="whoOk" class="hidden">
+      <span class="badge">Tecnico: <strong id="techName">—</strong></span>
+      — <a id="changeTech" class="link">cambia</a>
+    </div>
+  </div>
+
+  <div class="panel hidden" id="formPanel">
+    <div class="row">
+      <div>
+        <label>1) DATA INTERVENTO</label>
+        <div class="input-wrap"><input id="dataIntervento" type="date"></div>
+      </div>
+      <div>
+        <label>1b) SINGOLISTA O IN COPPIA?</label>
+        <select id="singoloCoppia">
+          <option value="">— Seleziona —</option>
+          <option value="1">Singolista</option>
+          <option value="2">In coppia</option>
+        </select>
+      </div>
+      <div>
+        <label>2) CODICE OLO</label>
+        <input id="codOlo" placeholder="Es. COC2456, OPI..., numerico…">
+      </div>
+      <div>
+        <label>3) INDIRIZZO COMPLETO</label>
+        <input id="indirizzo" placeholder="Via, civico, CAP, città">
+      </div>
+      <div>
+        <label>4) SYSTEM</label>
+        <select id="system">
+          <option value="">— Seleziona —</option>
+          <option>SERTORI</option><option>ELECNOR</option><option>SDEN</option>
+        </select>
+      </div>
+      <div>
+        <label>5) GUASTO, ATTIVAZIONE, CESSAZIONE</label>
+        <select id="tipoIntervento">
+          <option value="">— Seleziona —</option>
+          <option>GUASTO</option><option>ATTIVAZIONE</option><option>CESSAZIONE</option>
+        </select>
+      </div>
+      <div id="guastoComeWrap">
+        <label>6) GUASTO CHIUSO COME</label>
+        <input id="guastoCome" placeholder="Descrizione chiusura guasto">
+      </div>
+      <div id="attivazioneWrap">
+        <div><label>7) OF O TIM?</label>
+          <select id="ofTim"><option value="">— Seleziona —</option><option>OF</option><option>TIM</option></select></div>
+        <div><label>8) TIPOLOGIA IMPIANTO</label>
+          <select id="tipologia"><option value="">— Seleziona —</option><option>MIGRAZIONE</option><option>SBRACCIO</option><option>MONO INTERNA</option><option>MONO ESTERNA</option><option>MONO ESTERNA POZZETTI/PALIFICA</option></select></div>
+        <div><label>9) MULTIFIBRA POSATO</label>
+          <select id="multifibra"><option value="">— Seleziona —</option><option>NO</option><option>SI</option></select></div>
+        <div><label>10) APPARATO INSTALLATO 1</label><input id="app1" placeholder="Obbligatorio"></div>
+        <div><label>11) APPARATO INSTALLATO 2</label><input id="app2" placeholder="Opzionale"></div>
+        <div><label>12) APPARATO INSTALLATO 3</label><input id="app3" placeholder="Opzionale"></div>
+      </div>
+      <div id="cessazioneWrap" class="hidden">
+        <label>13) Quante cessazioni hai svolto oggi?</label>
+        <select id="numCessazioni">
+          <option value="">— Seleziona —</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+          <option>13</option>
+          <option>14</option>
+          <option>15</option>
+          <option>16</option>
+          <option>17</option>
+          <option>18</option>
+          <option>19</option>
+          <option>20</option>
+          <option>21</option>
+          <option>22</option>
+          <option>23</option>
+          <option>24</option>
+          <option>25</option>
+          <option>26</option>
+          <option>27</option>
+          <option>28</option>
+          <option>29</option>
+          <option>30</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <button id="addRow" type="button">Aggiungi alla lista</button>
+      <button id="resetForm" type="button" class="btn-outline">Reset</button>
+    </div>
+    <div id="status" style="margin-top:8px;color:#9fb0c9"></div>
+  </div>
+
+  <div class="panel hidden" id="queuePanel">
+    <div class="tablewrap">
+      <table id="queueTable"><thead><tr>
+        <th>#</th><th>Data</th><th>1/2</th><th>OLO</th><th>Indirizzo</th><th>System</th><th>Tipo</th><th>OF/TIM</th><th>Tipologia</th><th>Multifibra</th><th>Cessazioni</th><th>Apparati</th><th class="right">Azioni</th>
+      </tr></thead><tbody></tbody></table>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <button id="addAnother" type="button">INSERISCINE UN ALTRO</button>
+      <button id="sendAll" type="button" class="btn-success">INVIA AL FOGLIO DI GOOGLE</button>
+      <button id="newSession" type="button" class="btn-outline">NUOVA SESSIONE</button>
+    </div>
+    <div id="sendStatus" style="margin-top:8px;"></div>
+  </div>
+</div>
+
+<div id="successOverlay" class="overlay" style="display:none"><!-- ensure hidden at start -->
+  <div class="card">
+    <div class="check"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h3>Operazioni terminate</h3>
+    <p id="successMsg">Inserite 0 righe con successo.</p>
+    <div class="actions"><button id="successAdd" type="button" class="btn-outline">INSERISCINE UN ALTRO</button><button id="successClose" type="button" class="btn-success">CHIUDI</button></div>
+    <p class="small">La lista è stata svuotata.</p>
+  </div>
+</div>
+
+<div id="confirmOverlay" class="overlay" style="display:none">
+  <div class="card">
+    <h3>Hai eseguito altri interventi?</h3>
+    <div class="actions">
+      <button id="confirmYes" type="button" class="btn-success">SI — INSERISCINE UN ALTRO</button>
+      <button id="confirmNo" type="button" class="btn-outline">NO — VAI AL RIEPILOGO PER INVIARE</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./sw.js'); }
+
+  const WEBHOOK = "https://script.google.com/macros/s/AKfycbyKP3amA7CCKk4TypuVVmykY5vJOtmXz_HavrgfK-WJ4qkORqOEd2BsEAXBFxnz2vRt/exec";
+  const TOKEN   = "luce2025secure";
+
+  const qs = (x) => document.querySelector(x);
+
+  const techSel = qs('#tech');
+  const setTech = qs('#setTech');
+  const whoEmpty = qs('#whoEmpty');
+  const whoOk = qs('#whoOk');
+  const techName = qs('#techName');
+
+  // Safe init
+  whoEmpty.classList.remove('hidden');
+  whoOk.classList.add('hidden');
+  qs('#formPanel').classList.add('hidden');
+
+  setTech.addEventListener('click', function() {
+    const v = (techSel.value || '').trim();
+    if (!v) { alert('Seleziona un tecnico'); return; }
+    techName.textContent = v;
+    whoEmpty.classList.add('hidden');
+    whoOk.classList.remove('hidden');
+    qs('#formPanel').classList.remove('hidden');
+  });
+
+  qs('#changeTech').addEventListener('click', function() {
+    whoEmpty.classList.remove('hidden');
+    whoOk.classList.add('hidden');
+    qs('#formPanel').classList.add('hidden');
+    if (!qs('#queueTable tbody').children.length) qs('#queuePanel').classList.add('hidden');
+  });
+
+  const dataIntervento=qs('#dataIntervento'), singoloCoppia=qs('#singoloCoppia'), codOlo=qs('#codOlo'), indirizzo=qs('#indirizzo'), system=qs('#system'), tipoIntervento=qs('#tipoIntervento'), guastoComeWrap=qs('#guastoComeWrap'), guastoCome=qs('#guastoCome'), attivazioneWrap=qs('#attivazioneWrap'), ofTim=qs('#ofTim'), tipologia=qs('#tipologia'), multifibra=qs('#multifibra'), app1=qs('#app1'), app2=qs('#app2'), app3=qs('#app3'), cessazioneWrap=qs('#cessazioneWrap'), numCessazioni=qs('#numCessazioni');
+
+  function updateVisibility(){
+    const v=(tipoIntervento.value||'').toUpperCase();
+    if(v==='GUASTO'){ guastoComeWrap.classList.remove('hidden'); attivazioneWrap.classList.add('hidden'); cessazioneWrap.classList.add('hidden');}
+    else if(v==='ATTIVAZIONE'){ guastoComeWrap.classList.add('hidden'); attivazioneWrap.classList.remove('hidden'); cessazioneWrap.classList.add('hidden');}
+    else if(v==='CESSAZIONE'){ guastoComeWrap.classList.add('hidden'); attivazioneWrap.classList.add('hidden'); cessazioneWrap.classList.remove('hidden');}
+    else { guastoComeWrap.classList.add('hidden'); attivazioneWrap.classList.add('hidden'); cessazioneWrap.classList.add('hidden');}
+  }
+  tipoIntervento.addEventListener('change', updateVisibility);
+  updateVisibility();
+
+  function resetFormFields(){
+    dataIntervento.value=''; singoloCoppia.value=''; codOlo.value=''; indirizzo.value=''; system.value=''; tipoIntervento.value=''; guastoCome.value=''; ofTim.value=''; tipologia.value=''; multifibra.value=''; app1.value=''; app2.value=''; app3.value=''; numCessazioni.value=''; updateVisibility(); qs('#status').textContent='';
+  }
+
+  const successOverlay=qs('#successOverlay'), successMsg=qs('#successMsg'), successAdd=qs('#successAdd'), successClose=qs('#successClose');
+  successAdd.addEventListener('click',()=>{successOverlay.style.display='none'; qs('#queuePanel').classList.add('hidden'); resetFormFields(); qs('#formPanel').classList.remove('hidden');});
+  successClose.addEventListener('click',()=>{successOverlay.style.display='none';});
+
+  const confirmOverlay=qs('#confirmOverlay');
+  qs('#confirmYes').addEventListener('click',()=>{confirmOverlay.style.display='none'; qs('#queuePanel').classList.add('hidden'); resetFormFields(); qs('#formPanel').classList.remove('hidden');});
+  qs('#confirmNo').addEventListener('click',()=>{confirmOverlay.style.display='none'; qs('#formPanel').classList.add('hidden'); qs('#queuePanel').classList.remove('hidden');});
+
+  const tbody=document.querySelector('#queueTable tbody');
+
+  function tsLocal(){const d=new Date(); const p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`; }
+
+  function addRow(){
+    const tech=techName.textContent||'';
+    if(!tech){alert('Seleziona prima il tecnico');return;}
+    if(!dataIntervento.value){alert('Inserisci la DATA INTERVENTO');return;}
+    if(!singoloCoppia.value){alert('Seleziona SINGOLISTA o IN COPPIA');return;}
+    const tipo=(tipoIntervento.value||'').toUpperCase();
+    if(!tipo){alert('Seleziona il TIPO INTERVENTO');return;}
+    if(tipo==='ATTIVAZIONE'){ if(!ofTim.value){alert('Seleziona OF/TIM');return;} if(!tipologia.value){alert('Seleziona la TIPOLOGIA IMPIANTO');return;} if(!app1.value.trim()){alert('APPARATO INSTALLATO 1 è obbligatorio');return;} }
+    if(tipo==='CESSAZIONE' && !numCessazioni.value){alert('Seleziona il numero di cessazioni');return;}
+    if(tipo==='CESSAZIONE'){ ofTim.value=''; tipologia.value=''; multifibra.value=''; app1.value=''; app2.value=''; app3.value=''; guastoCome.value=''; }
+    if(tipo==='GUASTO'){ numCessazioni.value=''; ofTim.value=''; tipologia.value=''; multifibra.value=''; app1.value=''; app2.value=''; app3.value=''; }
+    const row={"NOME TECNICO":tech,"DATA INTERVENTO":dataIntervento.value,"SINGOLISTA O COPPIA":singoloCoppia.value,"CODICE OLO":codOlo.value.trim(),"INDIRIZZO COMPLETO":indirizzo.value.trim(),"SYSTEM":(system.value||'').toUpperCase(),"TIPO INTERVENTO":tipo,"GUASTO CHIUSO COME":guastoCome.value.trim(),"OF O TIM":(ofTim.value||'').toUpperCase(),"TIPOLOGIA IMPIANTO":(tipologia.value||'').toUpperCase(),"MULTIFIBRA POSATO":(multifibra.value||'').toUpperCase(),"APPARATO INSTALLATO 1":app1.value.trim(),"APPARATO INSTALLATO 2":app2.value.trim(),"APPARATO INSTALLATO 3":app3.value.trim(),"NUMERO CESSAZIONI":(tipo==='CESSAZIONE'?(numCessazioni.value||''):""),"Timestamp":tsLocal()};
+    const ALL_KEYS=["NOME TECNICO","DATA INTERVENTO","SINGOLISTA O COPPIA","CODICE OLO","INDIRIZZO COMPLETO","SYSTEM","TIPO INTERVENTO","GUASTO CHIUSO COME","OF O TIM","TIPOLOGIA IMPIANTO","MULTIFIBRA POSATO","APPARATO INSTALLATO 1","APPARATO INSTALLATO 2","APPARATO INSTALLATO 3","NUMERO CESSAZIONI","Timestamp"]; ALL_KEYS.forEach(k=>{if(row[k]===undefined)row[k]="";});
+    const idx=tbody.children.length+1; const apparati=[row["APPARATO INSTALLATO 1"],row["APPARATO INSTALLATO 2"],row["APPARATO INSTALLATO 3"]].filter(Boolean).join(" | ");
+    const tr=document.createElement('tr'); tr.innerHTML='<td>'+idx+'</td><td>'+row["DATA INTERVENTO"]+'</td><td>'+row["SINGOLISTA O COPPIA"]+'</td><td>'+(row["CODICE OLO"]||'')+'</td><td>'+(row["INDIRIZZO COMPLETO"]||'')+'</td><td>'+(row["SYSTEM"]||'')+'</td><td>'+(row["TIPO INTERVENTO"]||'')+'</td><td>'+(row["OF O TIM"]||'')+'</td><td>'+(row["TIPOLOGIA IMPIANTO"]||'')+'</td><td>'+(row["MULTIFIBRA POSATO"]||'')+'</td><td>'+(row["NUMERO CESSAZIONI"]||'')+'</td><td>'+apparati+'</td><td class="right"><a class="link delRow">elimina</a></td>';
+    tr.dataset.payload=JSON.stringify(row); tbody.appendChild(tr); tr.querySelector('.delRow').addEventListener('click',function(){tr.remove(); if(!tbody.children.length) document.querySelector('#queuePanel').classList.add('hidden');});
+    document.querySelector('#status').textContent="Aggiunto alla lista."; document.querySelector('#confirmOverlay').style.display='flex';
+  }
+
+  document.querySelector('#addRow').addEventListener('click', addRow);
+  document.querySelector('#addAnother').addEventListener('click', ()=>{document.querySelector('#queuePanel').classList.add('hidden'); resetFormFields(); document.querySelector('#formPanel').classList.remove('hidden');});
+  document.querySelector('#newSession').addEventListener('click', ()=>{tbody.innerHTML=''; document.querySelector('#queuePanel').classList.add('hidden'); whoEmpty.classList.remove('hidden'); whoOk.classList.add('hidden'); document.querySelector('#formPanel').classList.add('hidden');});
+
+  async function sendRows(){
+    const rows=Array.from(tbody.children).map(tr=>JSON.parse(tr.dataset.payload));
+    if(!rows.length){alert('La lista è vuota');return;}
+    try{const payload={token:TOKEN,rows}; const r=await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}); const t=await r.text(); let js=null; try{js=JSON.parse(t);}catch(e){} if(r.ok && js && js.ok){tbody.innerHTML=''; document.querySelector('#queuePanel').classList.add('hidden'); document.querySelector('#successMsg').textContent=`Inserite ${js.inserted} righe con successo.`; document.querySelector('#successOverlay').style.display='flex';} else {alert('Errore: ' + (js&&js.error?js.error:'invio fallito'));} } catch(err){alert('Errore di rete: '+err.message);}
+  }
+  document.querySelector('#sendAll').addEventListener('click', function(){
+  const __btn = document.querySelector('#sendAll');
+  const __ov  = document.getElementById('loadingOverlay');
+  if (__btn){ __btn.disabled = true; __btn.textContent = 'Invio...'; }
+  if (__ov){ __ov.classList.remove('hidden'); }
+  Promise.resolve(sendRows())
+    .catch(()=>{})
+    .finally(()=>{
+      if (__ov){ __ov.classList.add('hidden'); }
+      if (__btn){ __btn.disabled = false; __btn.textContent = 'INVIA AL FOGLIO DI GOOGLE'; }
+    });
+});
+});
+
+function renderReview(){
+  const tbody = document.querySelector('#tbl tbody');
+  if (!tbody) return;
+  tbody.innerHTML='';
+  rows.forEach((r,idx)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r["NOME TECNICO"]||''}</td>
+      <td>${r["DATA INTERVENTO"]||''}</td>
+      <td>${r["CODICE OLO"]||''}</td>
+      <td>${r["INDIRIZZO COMPLETO"]||''}</td>
+      <td>${r["SYSTEM"]||''}</td>
+      <td>${r["TIPO INTERVENTO"]||''}</td>
+      <td>${r["OF O TIM"]||''}</td>
+      <td>${r["TIPOLOGIA IMPIANTO"]||''}</td>
+      <td>${r["MULTIFIBRA POSATO"]||''}</td>
+      <td>${r["APPARATO INSTALLATO 1"]||''}</td>
+      <td>${r["APPARATO INSTALLATO 2"]||''}</td>
+      <td>${r["APPARATO INSTALLATO 3"]||''}</td>
+      <td>${r["GUASTO CHIUSO COME"]||''}</td>
+      <td>${r["SINGOLISTA O COPPIA"]||''}</td>
+      <td>${r["NUMERO CESSAZIONI"]||''}</td>
+      <td>
+        <button data-edit="${idx}" class="btn-outline">Modifica</button>
+        <button data-i="${idx}" class="btn-outline">Elimina</button>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  // bind delete
+  tbody.querySelectorAll('button[data-i]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const i = parseInt(b.getAttribute('data-i'),10);
+      rows.splice(i,1);
+      renderReview();
+    });
+  });
+  // bind edit
+  tbody.querySelectorAll('button[data-edit]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const i = parseInt(b.getAttribute('data-edit'),10);
+      const r = rows[i];
+      editingIndex = i;
+      editingKeepTimestamp = r["Timestamp"] || '';
+      loadIntoForm(r);
+      document.getElementById('review').classList.add('hidden');
+      document.getElementById('formPanel').classList.remove('hidden');
+      const btn = document.getElementById('btnAdd');
+      if (btn) btn.textContent = 'Salva modifica';
+      window.scrollTo(0,0);
+    });
+  });
+}
+
+</script>
+
+<!-- Overlay caricamento invio -->
+<div id="loadingOverlay" class="overlay hidden">
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;align-items:center">
+      <div style="width:22px;height:22px;border-radius:50%;background:#6fb4ff;display:flex;align-items:center;justify-content:center;color:#04122e;font-weight:900">⏳</div>
+      <div>
+        <div style="font-weight:800">Caricamento interventi in corso...</div>
+        <div class="small">Attendere Prego</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  // Ensure editing globals
+  if (typeof window.editingIndex === 'undefined') window.editingIndex = -1;
+  if (typeof window.editingKeepTimestamp === 'undefined') window.editingKeepTimestamp = '';
+
+  // Safe loader for row -> form
+  if (typeof window.loadIntoForm !== 'function'){
+    window.loadIntoForm = function(r){
+      const set = (id,val)=>{ const el=document.getElementById(id); if(el){ el.value = val||''; } };
+      set('tecnico', r["NOME TECNICO"]);
+      set('dataIntervento', String(r["DATA INTERVENTO"]||'').slice(0,10));
+      set('teamSize', r["SINGOLISTA O COPPIA"]||'1');
+      set('codiceOlo', r["CODICE OLO"]);
+      set('indirizzo', r["INDIRIZZO COMPLETO"]);
+      set('system', r["SYSTEM"]);
+      set('tipoIntervento', r["TIPO INTERVENTO"]);
+      set('guastoCome', r["GUASTO CHIUSO COME"]);
+      set('ofTim', r["OF O TIM"]);
+      set('tipologia', r["TIPOLOGIA IMPIANTO"]);
+      set('multifibra', r["MULTIFIBRA POSATO"]);
+      set('app1', r["APPARATO INSTALLATO 1"]);
+      set('app2', r["APPARATO INSTALLATO 2"]);
+      set('app3', r["APPARATO INSTALLATO 3"]);
+      set('numCess', r["NUMERO CESSAZIONI"]||'1');
+      if (typeof updateVisibility==='function') updateVisibility();
+    };
+  }
+
+  function bindEditHandlers(){
+    document.querySelectorAll('#tbl tbody button[data-edit]').forEach(b=>{
+      if (b.__editBound) return;
+      b.__editBound = true;
+      b.addEventListener('click', ()=>{
+        const i = parseInt(b.getAttribute('data-edit'),10);
+        if (!Array.isArray(window.rows) || !rows[i]) return;
+        const r = rows[i];
+        window.editingIndex = i;
+        window.editingKeepTimestamp = r["Timestamp"] || '';
+        window.loadIntoForm(r);
+        const review = document.getElementById('review');
+        const formPanel = document.getElementById('formPanel');
+        if (review && formPanel){ review.classList.add('hidden'); formPanel.classList.remove('hidden'); }
+        const btn = document.getElementById('btnAdd');
+        if (btn) btn.textContent = 'Salva modifica';
+        window.scrollTo(0,0);
+      });
+    });
+  }
+
+  function ensureButtons(){
+    const tbody = document.querySelector('#tbl tbody');
+    if (!tbody) return;
+    const trs = tbody.querySelectorAll('tr');
+    trs.forEach((tr, idx)=>{
+      let last = tr.lastElementChild;
+      if (!last) return;
+      const hasDelete = last.querySelector('button[data-i]');
+      const hasEdit = last.querySelector('button[data-edit]');
+      if (hasDelete && !hasEdit){
+        const b = document.createElement('button');
+        b.className = 'btn-outline';
+        b.textContent = 'Modifica';
+        b.setAttribute('data-edit', idx);
+        last.insertBefore(b, hasDelete);
+      }
+    });
+    bindEditHandlers();
+  }
+
+  // Wrap existing renderReview
+  (function wrap(){
+    if (typeof window.renderReview === 'function' && !window.renderReview.__wrapped){
+      const orig = window.renderReview;
+      window.renderReview = function(){
+        const out = orig.apply(this, arguments);
+        ensureButtons();
+        return out;
+      };
+      window.renderReview.__wrapped = true;
+      // also ensure once at start
+      ensureButtons();
+    } else {
+      setTimeout(wrap, 150);
+    }
+  })();
+
+})();
+</script>
+
+
+<script>
+(function(){
+  // ensure globals for editing
+  if (typeof window.editingIndex === 'undefined') window.editingIndex = -1;
+  if (typeof window.editingKeepTimestamp === 'undefined') window.editingKeepTimestamp = '';
+
+  // Safe loader: fill form from row object
+  if (typeof window.loadIntoForm !== 'function'){
+    window.loadIntoForm = function(r){
+      const set = (id,val)=>{ const el=document.getElementById(id); if(el){ el.value = val||''; } };
+      set('tecnico', r["NOME TECNICO"]);
+      set('dataIntervento', String(r["DATA INTERVENTO"]||'').slice(0,10));
+      set('teamSize', r["SINGOLISTA O COPPIA"]||'1');
+      set('codiceOlo', r["CODICE OLO"]);
+      set('indirizzo', r["INDIRIZZO COMPLETO"]);
+      set('system', r["SYSTEM"]);
+      set('tipoIntervento', r["TIPO INTERVENTO"]);
+      set('guastoCome', r["GUASTO CHIUSO COME"]);
+      set('ofTim', r["OF O TIM"]);
+      set('tipologia', r["TIPOLOGIA IMPIANTO"]);
+      set('multifibra', r["MULTIFIBRA POSATO"]);
+      set('app1', r["APPARATO INSTALLATO 1"]);
+      set('app2', r["APPARATO INSTALLATO 2"]);
+      set('app3', r["APPARATO INSTALLATO 3"]);
+      set('numCess', r["NUMERO CESSAZIONI"]||'1');
+      if (typeof updateVisibility==='function') updateVisibility();
+    };
+  }
+
+  function bindRowEdit(btn, idx){
+    if (btn.__editBound) return;
+    btn.__editBound = true;
+    btn.addEventListener('click', ()=>{
+      if (!Array.isArray(window.rows) || !rows[idx]) return;
+      const r = rows[idx];
+      window.editingIndex = idx;
+      window.editingKeepTimestamp = r["Timestamp"] || '';
+      window.loadIntoForm(r);
+      const review = document.getElementById('review');
+      const formPanel = document.getElementById('formPanel');
+      if (review && formPanel){ review.classList.add('hidden'); formPanel.classList.remove('hidden'); }
+      const btnAdd = document.getElementById('btnAdd');
+      if (btnAdd) btnAdd.textContent = 'Salva modifica';
+      window.scrollTo(0,0);
+    });
+  }
+
+  function ensureModifica(){
+    const tbody = document.querySelector('#tbl tbody');
+    if (!tbody) return;
+    const trs = tbody.querySelectorAll('tr');
+    trs.forEach((tr, i)=>{
+      // last cell may or may not exist; create if missing
+      let last = tr.lastElementChild;
+      if (!last) {
+        last = document.createElement('td');
+        tr.appendChild(last);
+      }
+      // already has a Modifica control?
+      if (!last.querySelector('[data-edit]')){
+        const b = document.createElement('button');
+        b.className = 'btn-outline';
+        b.textContent = 'Modifica';
+        b.setAttribute('data-edit', i);
+        // insert as first action button for coerenza grafica
+        last.insertBefore(b, last.firstChild);
+        bindRowEdit(b, i);
+      }
+    });
+  }
+
+  // Observe changes to tbody so we re-inject after ogni render
+  function startObserver(){
+    const tbody = document.querySelector('#tbl tbody');
+    if (!tbody) return setTimeout(startObserver, 250);
+    ensureModifica();
+    const obs = new MutationObserver(()=>{ ensureModifica(); });
+    obs.observe(tbody, {childList:true, subtree:true});
+  }
+  startObserver();
+
+  // Anche se esiste renderReview, wrappo per sicurezza
+  (function wrap(){
+    if (typeof window.renderReview === 'function' && !window.renderReview.__wrapped){
+      const orig = window.renderReview;
+      window.renderReview = function(){
+        const out = orig.apply(this, arguments);
+        ensureModifica();
+        return out;
+      };
+      window.renderReview.__wrapped = true;
+    }
+  })();
+})();
+</script>
+
+
+<script>
+// --- robust injection of "Modifica" in review table, independent of specific IDs ---
+(function(){
+  function ensureGlobals(){
+    if (typeof window.editingIndex === 'undefined') window.editingIndex = -1;
+    if (typeof window.editingKeepTimestamp === 'undefined') window.editingKeepTimestamp = '';
+    if (typeof window.loadIntoForm !== 'function'){
+      window.loadIntoForm = function(r){
+        const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.value = val||''; };
+        set('tecnico', r["NOME TECNICO"]);
+        set('dataIntervento', String(r["DATA INTERVENTO"]||'').slice(0,10));
+        set('teamSize', r["SINGOLISTA O COPPIA"]||'1');
+        set('codiceOlo', r["CODICE OLO"]);
+        set('indirizzo', r["INDIRIZZO COMPLETO"]);
+        set('system', r["SYSTEM"]);
+        set('tipoIntervento', r["TIPO INTERVENTO"]);
+        set('guastoCome', r["GUASTO CHIUSO COME"]);
+        set('ofTim', r["OF O TIM"]);
+        set('tipologia', r["TIPOLOGIA IMPIANTO"]);
+        set('multifibra', r["MULTIFIBRA POSATO"]);
+        set('app1', r["APPARATO INSTALLATO 1"]);
+        set('app2', r["APPARATO INSTALLATO 2"]);
+        set('app3', r["APPARATO INSTALLATO 3"]);
+        set('numCess', r["NUMERO CESSAZIONI"]||'1');
+        if (typeof updateVisibility==='function') updateVisibility();
+      };
+    }
+  }
+
+  function toArray(nl){ return Array.prototype.slice.call(nl||[]); }
+
+  function injectButtons(){
+    ensureGlobals();
+    const review = document.getElementById('review');
+    if (!review) return;
+    const tbodies = review.querySelectorAll('tbody');
+    tbodies.forEach(tb => {
+      const trs = toArray(tb.querySelectorAll('tr'));
+      trs.forEach((tr, idxRow) => {
+        let lastCell = tr.lastElementChild;
+        if (!lastCell) { lastCell = document.createElement('td'); tr.appendChild(lastCell); }
+        if (!lastCell.querySelector('.btn-edit-row')){
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'btn-outline btn-edit-row';
+          btn.textContent = 'Modifica';
+          // place before any existing content (e.g., "elimina" link)
+          lastCell.insertBefore(btn, lastCell.firstChild);
+          btn.addEventListener('click', () => {
+            try {
+              if (!Array.isArray(window.rows) || !rows[idxRow]) return;
+              const r = rows[idxRow];
+              window.editingIndex = idxRow;
+              window.editingKeepTimestamp = r["Timestamp"] || '';
+              window.loadIntoForm(r);
+              const review = document.getElementById('review');
+              const formPanel = document.getElementById('formPanel');
+              if (review && formPanel){ review.classList.add('hidden'); formPanel.classList.remove('hidden'); }
+              const btnAdd = document.getElementById('btnAdd');
+              if (btnAdd) btnAdd.textContent = 'Salva modifica';
+              window.scrollTo(0,0);
+            } catch(e){ console.error(e); }
+          });
+        }
+      });
+    });
+  }
+
+  function startObserver(){
+    const review = document.getElementById('review');
+    if (!review) return setTimeout(startObserver, 250);
+    injectButtons();
+    const obs = new MutationObserver(() => injectButtons());
+    obs.observe(review, {subtree:true, childList:true});
+  }
+
+  // start after DOM ready
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', startObserver);
+  } else {
+    startObserver();
+  }
+
+  // wrap existing renderReview as extra safety
+  (function wrap(){
+    if (typeof window.renderReview === 'function' && !window.renderReview.__wrapped){
+      const orig = window.renderReview;
+      window.renderReview = function(){
+        const out = orig.apply(this, arguments);
+        injectButtons();
+        return out;
+      };
+      window.renderReview.__wrapped = true;
+    }
+  })();
+})();
+</script>
+
+
+<script>
+// --- Body-wide injector: add "Modifica" to any review-like table rows ---
+(function(){
+  function ensureGlobals(){
+    if (typeof window.editingIndex === 'undefined') window.editingIndex = -1;
+    if (typeof window.editingKeepTimestamp === 'undefined') window.editingKeepTimestamp = '';
+    if (typeof window.loadIntoForm !== 'function'){
+      window.loadIntoForm = function(r){
+        const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.value = val||''; };
+        set('tecnico', r["NOME TECNICO"]);
+        set('dataIntervento', String(r["DATA INTERVENTO"]||'').slice(0,10));
+        set('teamSize', r["SINGOLISTA O COPPIA"]||'1');
+        set('codiceOlo', r["CODICE OLO"]);
+        set('indirizzo', r["INDIRIZZO COMPLETO"]);
+        set('system', r["SYSTEM"]);
+        set('tipoIntervento', r["TIPO INTERVENTO"]);
+        set('guastoCome', r["GUASTO CHIUSO COME"]);
+        set('ofTim', r["OF O TIM"]);
+        set('tipologia', r["TIPOLOGIA IMPIANTO"]);
+        set('multifibra', r["MULTIFIBRA POSATO"]);
+        set('app1', r["APPARATO INSTALLATO 1"]);
+        set('app2', r["APPARATO INSTALLATO 2"]);
+        set('app3', r["APPARATO INSTALLATO 3"]);
+        set('numCess', r["NUMERO CESSAZIONI"]||'1');
+        if (typeof updateVisibility==='function') updateVisibility();
+      };
+    }
+  }
+
+  function findContainers(){
+    // Prefer a container that has a table and a header simile a "Riepilogo"
+    const candidates = Array.from(document.querySelectorAll('table')).map(t=>t);
+    return candidates;
+  }
+
+  function getRowsArrayIndex(tr){
+    // Row index inside its tbody
+    const tbody = tr.parentElement;
+    if (!tbody) return -1;
+    return Array.prototype.indexOf.call(tbody.children, tr);
+  }
+
+  function goEdit(idx){
+    if (!Array.isArray(window.rows) || !rows[idx]) return;
+    const r = rows[idx];
+    window.editingIndex = idx;
+    window.editingKeepTimestamp = r["Timestamp"] || '';
+    window.loadIntoForm(r);
+    const review = document.getElementById('review');
+    const formPanel = document.getElementById('formPanel');
+    if (review && formPanel){ review.classList.add('hidden'); formPanel.classList.remove('hidden'); }
+    const btnAdd = document.getElementById('btnAdd');
+    if (btnAdd) btnAdd.textContent = 'Salva modifica';
+    window.scrollTo(0,0);
+  }
+
+  function injectButtons(){
+    ensureGlobals();
+    const tables = findContainers();
+    tables.forEach(table => {
+      const tbodies = table.tBodies ? Array.from(table.tBodies) : [];
+      tbodies.forEach(tb => {
+        Array.from(tb.rows).forEach(tr => {
+          let actionsCell = tr.lastElementChild || tr.appendChild(document.createElement('td'));
+          if (!actionsCell.querySelector('.btn-edit-row')){
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'btn-outline btn-edit-row';
+            btn.textContent = 'Modifica';
+            actionsCell.insertBefore(btn, actionsCell.firstChild);
+            btn.addEventListener('click', (ev)=>{
+              ev.preventDefault();
+              const idx = getRowsArrayIndex(tr);
+              goEdit(idx);
+            });
+          }
+        });
+      });
+    });
+  }
+
+  function startObs(){
+    injectButtons();
+    const obs = new MutationObserver(()=>injectButtons());
+    obs.observe(document.body, {childList:true, subtree:true});
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', startObs);
+  } else {
+    startObs();
+  }
+
+  // also wrap renderReview if present
+  (function wrap(){
+    if (typeof window.renderReview === 'function' && !window.renderReview.__wrapped){
+      const orig = window.renderReview;
+      window.renderReview = function(){
+        const out = orig.apply(this, arguments);
+        injectButtons();
+        return out;
+      };
+      window.renderReview.__wrapped = true;
+    }
+  })();
+})();
+</script>
+
+
+<script>
+// --- True edit mode: load row into form and save back to the same <tr> ---
+(function(){
+  let editingTr = null;
+
+  function qs(sel){ return document.querySelector(sel); }
+
+  function buildRowObjectFromForm(){
+    const tech = (qs('#techName')? qs('#techName').textContent : '') || '';
+    const tipo = (qs('#tipoIntervento')?.value || '').toUpperCase();
+    const row = {
+      "NOME TECNICO": tech,
+      "DATA INTERVENTO": qs('#dataIntervento')?.value || '',
+      "SINGOLISTA O COPPIA": qs('#singoloCoppia')?.value || '',
+      "CODICE OLO": (qs('#codOlo')?.value || '').trim(),
+      "INDIRIZZO COMPLETO": (qs('#indirizzo')?.value || '').trim(),
+      "SYSTEM": qs('#system')?.value || '',
+      "TIPO INTERVENTO": qs('#tipoIntervento')?.value || '',
+      "GUASTO CHIUSO COME": (qs('#guastoCome')?.value || '').trim(),
+      "OF O TIM": qs('#ofTim')?.value || '',
+      "TIPOLOGIA IMPIANTO": qs('#tipologia')?.value || '',
+      "MULTIFIBRA POSATO": qs('#multifibra')?.value || '',
+      "APPARATO INSTALLATO 1": (qs('#app1')?.value || '').trim(),
+      "APPARATO INSTALLATO 2": (qs('#app2')?.value || '').trim(),
+      "APPARATO INSTALLATO 3": (qs('#app3')?.value || '').trim(),
+      "NUMERO CESSAZIONI": (tipo === 'CESSAZIONE' ? (qs('#numCessazioni')?.value || '') : '')
+    };
+    return row;
+  }
+
+  function buildRowHTML(row, idx){
+    const apparati = [row["APPARATO INSTALLATO 1"],row["APPARATO INSTALLATO 2"],row["APPARATO INSTALLATO 3"]].filter(Boolean).join(" | ");
+    return '<td>'+ (idx+1) +'</td>'
+      + '<td>'+(row["DATA INTERVENTO"]||'')+'</td>'
+      + '<td>'+(row["SINGOLISTA O COPPIA"]||'')+'</td>'
+      + '<td>'+(row["CODICE OLO"]||'')+'</td>'
+      + '<td>'+(row["INDIRIZZO COMPLETO"]||'')+'</td>'
+      + '<td>'+(row["SYSTEM"]||'')+'</td>'
+      + '<td>'+(row["TIPO INTERVENTO"]||'')+'</td>'
+      + '<td>'+(row["OF O TIM"]||'')+'</td>'
+      + '<td>'+(row["TIPOLOGIA IMPIANTO"]||'')+'</td>'
+      + '<td>'+(row["MULTIFIBRA POSATO"]||'')+'</td>'
+      + '<td>'+(row["NUMERO CESSAZIONI"]||'')+'</td>'
+      + '<td>'+ apparati +'</td>'
+      + '<td class="right"><a class="link delRow">elimina</a></td>';
+  }
+
+  function bindDelete(tr, tbody){
+    const del = tr.querySelector('.delRow');
+    if (del && !del.__bound){
+      del.__bound = true;
+      del.addEventListener('click', function(e){
+        e.preventDefault();
+        tr.remove();
+        // re-number rows
+        Array.from(tbody.rows).forEach((r,i)=>{ const first = r.cells[0]; if(first) first.textContent = String(i+1); });
+        if(!tbody.children.length){
+          const qp = document.querySelector('#queuePanel');
+          if (qp) qp.classList.add('hidden');
+        }
+      });
+    }
+  }
+
+  function switchToForm(){
+    const review = document.getElementById('queuePanel') || document.getElementById('review');
+    const formPanel = document.getElementById('formPanel');
+    if (review && formPanel){ review.classList.add('hidden'); formPanel.classList.remove('hidden'); }
+    window.scrollTo(0,0);
+  }
+  function switchToReview(){
+    const review = document.getElementById('queuePanel') || document.getElementById('review');
+    const formPanel = document.getElementById('formPanel');
+    if (review && formPanel){ review.classList.remove('hidden'); formPanel.classList.add('hidden'); }
+  }
+
+  // Click su "Modifica" (iniettato altrove): intercetto con event delegation
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.btn-edit-row');
+    if (!btn) return;
+    const tr = btn.closest('tr'); if (!tr) return;
+    const payload = tr.dataset.payload ? JSON.parse(tr.dataset.payload) : null;
+    if (!payload) return;
+    editingTr = tr;
+    // carica dati nel form
+    const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.value = val||''; };
+    set('dataIntervento', String(payload["DATA INTERVENTO"]||'').slice(0,10));
+    set('singoloCoppia', payload["SINGOLISTA O COPPIA"]||'');
+    set('codOlo', payload["CODICE OLO"]||'');
+    set('indirizzo', payload["INDIRIZZO COMPLETO"]||'');
+    set('system', payload["SYSTEM"]||'');
+    set('tipoIntervento', payload["TIPO INTERVENTO"]||'');
+    set('guastoCome', payload["GUASTO CHIUSO COME"]||'');
+    set('ofTim', payload["OF O TIM"]||'');
+    set('tipologia', payload["TIPOLOGIA IMPIANTO"]||'');
+    set('multifibra', payload["MULTIFIBRA POSATO"]||'');
+    set('app1', payload["APPARATO INSTALLATO 1"]||'');
+    set('app2', payload["APPARATO INSTALLATO 2"]||'');
+    set('app3', payload["APPARATO INSTALLATO 3"]||'');
+    set('numCessazioni', payload["NUMERO CESSAZIONI"]||'');
+    if (typeof updateVisibility==='function') updateVisibility();
+    const btnAdd = document.getElementById('addRow');
+    if (btnAdd){ btnAdd.textContent = 'SALVA MODIFICA'; }
+    switchToForm();
+  }, true);
+
+  // Intercetto il click sul bottone "Aggiungi alla lista" quando siamo in modalità edit
+  const addBtn = document.getElementById('addRow');
+  if (addBtn){
+    addBtn.addEventListener('click', function(e){
+      if (!editingTr) return; // in inserimento normale lascio correre
+      e.preventDefault(); e.stopImmediatePropagation();
+      // ricostruisco oggetto
+      const row = buildRowObjectFromForm();
+      // preservo timestamp dal TR in editing
+      try {
+        const old = editingTr.dataset.payload ? JSON.parse(editingTr.dataset.payload) : {};
+        if (old["Timestamp"]) row["Timestamp"] = old["Timestamp"];
+      } catch(_){}
+      // aggiorno TR
+      const tbody = editingTr.parentElement;
+      const idx = Array.prototype.indexOf.call(tbody.children, editingTr);
+      editingTr.innerHTML = buildRowHTML(row, idx);
+      editingTr.dataset.payload = JSON.stringify(row);
+      bindDelete(editingTr, tbody);
+      // reset stato
+      editingTr = null;
+      const btnAdd = document.getElementById('addRow');
+      if (btnAdd){ btnAdd.textContent = 'AGGIUNGI ALLA LISTA'; }
+      switchToReview();
+    }, true); // capture per fermare l'handler originale
+  }
+
+})(); 
+</script>
+
+
+<script>
+(function(){
+  function makeActionsCell(td, rowIdx){
+    if (!td) return;
+    // remove legacy "elimina" link
+    const a = td.querySelector('a.delRow');
+    if (a) a.remove();
+    // avoid duplicates
+    if (!td.querySelector('.btn-edit-row')){
+      const edit = document.createElement('button');
+      edit.className = 'icon-btn edit btn-edit-row';
+      edit.title='Modifica'; edit.setAttribute('aria-label','Modifica');
+      edit.innerHTML = '<img alt="Modifica" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nI2VhZjFmYicgZD0nTTMgMTcuMjVWMjFoMy43NUwxNy44MSA5Ljk0bC0zLjc1LTMuNzVMMyAxNy4yNXptMi45MiAyLjMzSDV2LS45Mmw5LjA2LTkuMDYuOTIuOTJMNS45MiAxOS41OHpNMjAuNzEgNy4wNGExLjAwMyAxLjAwMyAwIDAgMCAwLTEuNDJsLTIuMzQtMi4zNGExLjAwMyAxLjAwMyAwIDAgMC0xLjQyIDBsLTEuODMgMS44MyAzLjc1IDMuNzUgMS44NC0xLjgyeicvPjwvc3ZnPg==">';
+      td.insertBefore(edit, td.firstChild);
+    }
+    if (!td.querySelector('.btn-del-row')){
+      const del = document.createElement('button');
+      del.className = 'icon-btn del btn-del-row';
+      del.title='Elimina'; del.setAttribute('aria-label','Elimina');
+      del.innerHTML = '<img alt="Elimina" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nI2VhZjFmYicgZD0nTTYgN2gxMnYxSDZWN3ptMiAyaDhsLTEgMTFIOUw4IDl6bTMtNWgydjJoLTJWNHptNyAyaC0zVjRhMiAyIDAgMCAwLTItMmgtMmEyIDIgMCAwIDAtMiAydjJINnYyaDEyVjZ6Jy8+PC9zdmc+">';
+      td.appendChild(del);
+    }
+    td.classList.add('actions-inline');
+  }
+  function transformAll(){
+    const tables = document.querySelectorAll('table');
+    tables.forEach(t=>{
+      const tbodies = t.tBodies ? Array.from(t.tBodies) : [];
+      tbodies.forEach(tb=>{
+        Array.from(tb.rows).forEach((tr,idx)=>{
+          const last = tr.lastElementChild || tr.appendChild(document.createElement('td'));
+          makeActionsCell(last, idx);
+        });
+      });
+    });
+  }
+  // event delegation for delete
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.btn-del-row');
+    if (!btn) return;
+    e.preventDefault();
+    const tr = btn.closest('tr'); if (!tr) return;
+    const tbody = tr.parentElement;
+    tr.remove();
+    Array.from(tbody.rows).forEach((row,i)=>{ const first=row.cells[0]; if(first) first.textContent=String(i+1); });
+    const qp = document.getElementById('queuePanel');
+    if (qp && !tbody.rows.length){ qp.classList.add('hidden'); }
+  }, true);
+
+  // ensure after load and on mutations
+  const obs = new MutationObserver(transformAll);
+  window.addEventListener('load', ()=>{
+    transformAll();
+    obs.observe(document.body, {subtree:true, childList:true});
+  });
+})();
+</script>
+
+</body>
+</html>
