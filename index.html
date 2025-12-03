@@ -145,7 +145,7 @@ a.link{color:#8bb8ff;text-decoration:underline;cursor:pointer}
         <input id="guastoCome" placeholder="Descrizione chiusura guasto">
       </div>
       <div id="attivazioneWrap">
-        <div><label>7) OF O TIM?</label>
+        <div><label>7) OF - TIM o WIND(KOLME)?</label>
           <select id="ofTim"><option value="">— Seleziona —</option><option>OF</option><option>TIM</option></select></div>
         <div><label>8) TIPOLOGIA IMPIANTO</label>
           <select id="tipologia"><option value="">— Seleziona —</option><option>MIGRAZIONE</option><option>SBRACCIO</option><option>MONO INTERNA</option><option>MONO ESTERNA</option><option>MONO ESTERNA POZZETTI/PALIFICA</option></select></div>
@@ -1081,6 +1081,222 @@ function renderReview(){
 
   if (document.readyState !== 'loading') init();
   else document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+<script>
+(function(){
+  function qs(sel){return document.querySelector(sel);}
+  function qsa(sel,root){return Array.from((root||document).querySelectorAll(sel));}
+  function findSelectByOptions(required){
+    const selects = qsa('select');
+    return selects.find(s=>{
+      const vals = qsa('option',s).map(o=>(o.value||o.textContent||'').trim().toUpperCase());
+      return required.every(r=>vals.includes(r));
+    });
+  }
+
+  // selettori già usati in precedenza
+  let systemSel = qs('#system') || qs('#selectSystem') || findSelectByOptions(['SDEN','SERTORI','ELECNOR','KOLME']);
+  let oftimSel  = qs('#ofTim')  || qs('#of_tim')      || qs('#oftim') || findSelectByOptions(['OF','TIM','WIND']);
+  let tipoSel   = qs('#tipologia') || qs('#tipoImpianto') || qs('#tipo') ||
+                  findSelectByOptions(['MIGRAZIONE','SBRACCIO','MONO INTERNA']);
+
+  function up(s){ return (s||'').toString().trim().toUpperCase(); }
+
+  function renameOption(sel, fromLabel, toLabel){
+    if (!sel) return;
+    const fromU = up(fromLabel), toU = toLabel; // mantengo il testo originale con maiuscole/minuscole
+    const op = qsa('option', sel).find(o => up(o.value||o.textContent) === fromU);
+    if (op){
+      op.value = toU;
+      op.textContent = toLabel;
+    }
+  }
+
+  function ensureOption(sel, label){
+    if (!sel) return;
+    const exists = qsa('option',sel).some(o => up(o.value||o.textContent) === up(label));
+    if (!exists){
+      const op = document.createElement('option');
+      op.value = label;
+      op.textContent = label;
+      sel.appendChild(op);
+    }
+  }
+
+  function initTipologiaFWA(){
+    if (!tipoSel) return;
+    // 1) rinomina "FWA" -> "FWA PARETE" se esiste
+    renameOption(tipoSel, 'FWA', 'FWA PARETE');
+    // 2) assicura le 4 voci FWA
+    ensureOption(tipoSel, 'FWA PARETE');
+    ensureOption(tipoSel, 'FWA CAPPOTTO');
+    ensureOption(tipoSel, 'FWA IN QUOTA');
+    ensureOption(tipoSel, 'FWA USCITA A VUOTO');
+  }
+
+  function enforceRules(){
+    const isKolme = systemSel && up(systemSel.value)==='KOLME';
+
+    // Punto 7 (OF/TIM): se KOLME → solo WIND (regola già usata in precedenza)
+    if (oftimSel){
+      qsa('option', oftimSel).forEach(op=>{
+        const v = up(op.value||op.textContent);
+        if (isKolme){
+          const allow = (v==='' || v==='WIND');
+          op.hidden = !allow; op.disabled = !allow;
+        } else {
+          op.hidden = false; op.disabled = false;
+        }
+      });
+      if (isKolme && up(oftimSel.value)!=='WIND'){
+        const wind = qsa('option',oftimSel).find(o=> up(o.value||o.textContent)==='WIND');
+        if (wind) oftimSel.value = wind.value;
+      }
+    }
+
+    // Punto 8 (TIPOLOGIA IMPIANTO): se KOLME → solo voci che iniziano con "FWA"
+    if (tipoSel){
+      qsa('option', tipoSel).forEach(op=>{
+        const v = up(op.value||op.textContent);
+        if (isKolme){
+          const allow = (v==='' || v.startsWith('FWA'));
+          op.hidden = !allow; op.disabled = !allow;
+        } else {
+          op.hidden = false; op.disabled = false;
+        }
+      });
+      // set default "FWA PARETE" se KOLME e la selezione non è FWA*
+      if (isKolme && !up(tipoSel.value).startsWith('FWA')){
+        const def = qsa('option',tipoSel).find(o=> up(o.value||o.textContent)==='FWA PARETE')
+               || qsa('option',tipoSel).find(o=> up(o.value||o.textContent).startsWith('FWA'));
+        if (def) tipoSel.value = def.value;
+      }
+    }
+  }
+
+  function init(){
+    // Assicurati che le nuove voci ci siano
+    initTipologiaFWA();
+    // Applica le regole e bind al cambio sistema
+    enforceRules();
+    if (systemSel) systemSel.addEventListener('change', enforceRules);
+  }
+
+  if (document.readyState!=='loading') init();
+  else document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+<script>
+(function(){
+  function qs(s){return document.querySelector(s);}
+  function qsa(s,root){return Array.from((root||document).querySelectorAll(s));}
+  function up(x){ return (x||'').toString().trim().toUpperCase(); }
+
+  // Trovo select System e OF/TIM (riuso gli stessi criteri delle versioni precedenti)
+  var systemSel = qs('#system') || qs('#selectSystem') ||
+                  qsa('select').find(s => /SYSTEM/i.test(s.id||s.name||''));
+  var oftimSel  = qs('#ofTim')  || qs('#of_tim') || qs('#oftim') ||
+                  qsa('select').find(s => /OF\s*O\s*TIM/i.test(s.outerHTML) || /(ofTim|of_tim|oftim)/i.test(s.id||s.name||''));
+
+  function enforceOfTim(){
+    if (!systemSel || !oftimSel) return;
+    var sys = up(systemSel.value);
+    var isKolme   = (sys === 'KOLME');
+    var isSertori = (sys === 'SERTORI');
+    var isElecnor = (sys === 'ELECNOR');
+    var isSden    = (sys === 'SDEN');
+
+    // Regola richiesta:
+    // - Se KOLME  -> solo WIND
+    // - Se SERTORI/ELECNOR/SDEN -> nascondi WIND (consenti OF/TIM)
+    // - Default (altri) -> di sicurezza: nascondi WIND (così WIND è esclusiva di KOLME)
+    qsa('option', oftimSel).forEach(op=>{
+      var v = up(op.value || op.textContent);
+      if (isKolme){
+        // solo WIND (più eventuale placeholder vuoto)
+        var allow = (v==='' || v==='WIND');
+        op.hidden = !allow; op.disabled = !allow;
+      } else if (isSertori || isElecnor || isSden){
+        // niente WIND per questi System
+        if (v==='WIND'){ op.hidden = true; op.disabled = true; }
+        else { op.hidden = false; op.disabled = false; }
+      } else {
+        // default: WIND non selezionabile (riservato a KOLME)
+        if (v==='WIND'){ op.hidden = true; op.disabled = true; }
+        else { op.hidden = false; op.disabled = false; }
+      }
+    });
+
+    // Se il valore corrente non è più valido, seleziona il primo permesso (OF o TIM, o WIND per KOLME)
+    var curOp = qsa('option', oftimSel).find(o => o.value === oftimSel.value);
+    if (!curOp || curOp.hidden || curOp.disabled){
+      var fallback = qsa('option', oftimSel).find(o => !o.hidden && !o.disabled && up(o.value||o.textContent)!=='');
+      oftimSel.value = fallback ? fallback.value : '';
+    }
+  }
+
+  function ready(fn){ if(document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  ready(function(){
+    enforceOfTim();                 // applica subito
+    if (systemSel) systemSel.addEventListener('change', enforceOfTim); // ricalcola al cambio System
+  });
+})();
+</script>
+<script>
+(function(){
+  function qs(s){return document.querySelector(s);}
+  function qsa(s,root){return Array.from((root||document).querySelectorAll(s));}
+  function up(x){ return (x||'').toString().trim().toUpperCase(); }
+
+  // Trovo i select già in uso
+  var systemSel =
+      qs('#system') || qs('#selectSystem') ||
+      qsa('select').find(s => /system/i.test((s.id||'')+(s.name||'')));
+
+  // Heuristics per "Multifibra posato" (SI/NO)
+  var mfSel =
+      qs('#multifibra') || qs('#multifibraPosato') || qs('#multifibra_posato') ||
+      qsa('select').find(function(s){
+        const idn = (s.id||'') + ' ' + (s.name||'');
+        if (/multifibra/i.test(idn)) return true;
+        const vals = qsa('option', s).map(o => up(o.value||o.textContent));
+        return vals.includes('SI') && vals.includes('NO');
+      });
+
+  function enforceMultifibraRule(){
+    if (!systemSel || !mfSel) return;
+    var isKolme = (up(systemSel.value) === 'KOLME');
+
+    if (isKolme){
+      // forza NO e disabilita
+      const noOpt = Array.from(mfSel.options).find(o => up(o.value||o.textContent) === 'NO');
+      if (noOpt) mfSel.value = noOpt.value; else mfSel.value = 'NO';
+      mfSel.disabled = true;
+      mfSel.setAttribute('data-kolme-lock','1');
+      // opzionale: nascondi "SI" se vuoi
+      Array.from(mfSel.options).forEach(o=>{
+        const v = up(o.value||o.textContent);
+        if (v === 'SI') { o.hidden = true; o.disabled = true; }
+        else { /* lascio NO visibile */ }
+      });
+    } else {
+      // riabilita pienamente per SERTORI/ELECNOR/SDEN/altro
+      mfSel.disabled = false;
+      mfSel.removeAttribute('data-kolme-lock');
+      Array.from(mfSel.options).forEach(o=>{
+        o.hidden = false; o.disabled = false;
+      });
+    }
+  }
+
+  // Applica all'avvio e al cambio System
+  if (document.readyState !== 'loading') {
+    enforceMultifibraRule();
+  } else {
+    document.addEventListener('DOMContentLoaded', enforceMultifibraRule);
+  }
+  if (systemSel) systemSel.addEventListener('change', enforceMultifibraRule);
 })();
 </script>
 </body>
