@@ -999,6 +999,89 @@ function renderReview(){
   });
 })();
 </script>
+<!-- KOLME/WIND/FWA rules injection (non altera il resto) -->
+<script>
+(function(){
+  function qs(sel){return document.querySelector(sel);}
+  function qsa(sel,root){return Array.from((root||document).querySelectorAll(sel));}
+  function findSelectByOptions(required){
+    const selects = qsa('select');
+    return selects.find(s=>{
+      const vals = qsa('option',s).map(o=>(o.value||o.textContent||'').trim().toUpperCase());
+      return required.every(r=>vals.includes(r));
+    });
+  }
 
+  // Trovo i 3 select del tuo form
+  let systemSel = qs('#system') || qs('#selectSystem') || findSelectByOptions(['SDEN','SERTORI','ELECNOR']);
+  let oftimSel  = qs('#ofTim')  || qs('#of_tim')      || qs('#oftim') || findSelectByOptions(['OF','TIM']);
+  let tipoSel   = qs('#tipologia') || qs('#tipoImpianto') || qs('#tipo') || findSelectByOptions(['MIGRAZIONE','SBRACCIO','MONO INTERNA']);
+
+  function ensureOption(sel, value, label){
+    if (!sel) return;
+    const v = value.toUpperCase();
+    const exists = qsa('option', sel).some(o => ((o.value||o.textContent||'').trim().toUpperCase()===v));
+    if (!exists){
+      const op = document.createElement('option');
+      op.value = value;
+      op.textContent = label||value;
+      sel.appendChild(op);
+    }
+  }
+
+  function enforceRules(){
+    if (!systemSel) return;
+    const isKolme = (systemSel.value||'').toUpperCase()==='KOLME';
+
+    // Punto 7: se KOLME → solo WIND
+    if (oftimSel){
+      qsa('option', oftimSel).forEach(op=>{
+        const v = (op.value||op.textContent||'').trim().toUpperCase();
+        if (isKolme){
+          const allow = (v==='WIND' || v===''); // consenti placeholder vuoto
+          op.hidden = !allow; op.disabled = !allow;
+        } else {
+          op.hidden = false; op.disabled = false;
+        }
+      });
+      if (isKolme && (oftimSel.value||'').toUpperCase()!=='WIND'){
+        const wind = qsa('option',oftimSel).find(o=>((o.value||o.textContent||'').trim().toUpperCase()==='WIND'));
+        if (wind) oftimSel.value = wind.value;
+      }
+    }
+
+    // Punto 8: se KOLME → solo FWA
+    if (tipoSel){
+      qsa('option', tipoSel).forEach(op=>{
+        const v = (op.value||op.textContent||'').trim().toUpperCase();
+        if (isKolme){
+          const allow = (v==='FWA' || v===''); // consenti placeholder vuoto
+          op.hidden = !allow; op.disabled = !allow;
+        } else {
+          op.hidden = false; op.disabled = false;
+        }
+      });
+      if (isKolme && (tipoSel.value||'').toUpperCase()!=='FWA'){
+        const fwa = qsa('option',tipoSel).find(o=>((o.value||o.textContent||'').trim().toUpperCase()==='FWA'));
+        if (fwa) tipoSel.value = fwa.value;
+      }
+    }
+  }
+
+  function init(){
+    // Aggiunte richieste
+    ensureOption(systemSel, 'KOLME', 'KOLME'); // Campo 4 (SYSTEM)
+    ensureOption(oftimSel,  'WIND',  'WIND');  // Punto 7 (OF/TIM)
+    ensureOption(tipoSel,   'FWA',   'FWA');   // Punto 8 (TIPOLOGIA)
+
+    // Applica regole e bind change
+    enforceRules();
+    if (systemSel) systemSel.addEventListener('change', enforceRules);
+  }
+
+  if (document.readyState !== 'loading') init();
+  else document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
 </body>
 </html>
